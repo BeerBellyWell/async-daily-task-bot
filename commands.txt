@@ -1,0 +1,6 @@
+# Кнопки для /setcommands BotFather
+get_tasks - Мои таски
+create_task - Создать таску
+edit_task - Редактировать таску
+delete_task - Закрыть выполненную таску
+help - Справка
