@@ -1,12 +1,4 @@
-import os
-
-from dotenv import load_dotenv
-
-
-load_dotenv()
-
-
-help_text = (
+HELP_TEXT = (
     f'• get_tasks — Получить список тасок.\n'
     f'• create_task — Создать таску. Напишите, что вам нужно сделать.\n'
     f'• edit_task — Редактировать таску. Выберите таску, которую хотите изменить '

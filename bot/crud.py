@@ -2,10 +2,10 @@ from sqlalchemy import select, and_
 from telebot import types
 
 from database.models import User, Task
-from core.config import bot
-from validators import task_title_length_validator
+from bot.core.config import bot
+from bot.validators.validators import task_title_length_validator
 from database.db import session
-from core.config import TaskState
+from bot.core.config import TaskState
 
 
 async def get_user_id(message) -> int:
