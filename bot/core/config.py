@@ -13,6 +13,7 @@ class TaskState(StatesGroup):
     del_task = State()
     select_task_for_edit = State()
     new_title_for_edit_task = State()
+    get_tasks = State()
 
 
 bot = AsyncTeleBot(token=os.getenv('TOKEN'), state_storage=StateMemoryStorage())

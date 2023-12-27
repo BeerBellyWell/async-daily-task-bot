@@ -6,7 +6,7 @@ from bot.constants.constants import (
     HELP_TEXT,
 )
 from bot.validators.validators import list_tasks_in_str
-from bot.crud import (
+from bot.crud.crud import (
     get_user_id, create_user,
     get_open_tasks,
 )
@@ -33,15 +33,6 @@ async def help(message):
         message.chat.id,
         HELP_TEXT
     )
-
-
-# @bot.message_handler(state='*', commands='cancel')
-# async def any_state(message):
-#     """
-#     Cancel state
-#     """
-#     await bot.send_message(message.chat.id, "последнее выбранное действие было отменено")
-#     await bot.delete_state(message.from_user.id, message.chat.id)
 
 
 @bot.message_handler(commands=['create_task'])
