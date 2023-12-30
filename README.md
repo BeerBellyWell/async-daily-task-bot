@@ -2,7 +2,7 @@
 ### For the telegram
 > Проект телеграм-бота, который предоставляет возможность записывать, редактировать и удалять выполненные ежедневные задачи.
 
-Стек: Python v3.9, pyTelegramBotAPI, SQLAlchemy, Git.
+Стек: Python v3.11, pyTelegramBotAPI, SQLAlchemy, Git.
 
 
 ### Запуск проекта:
