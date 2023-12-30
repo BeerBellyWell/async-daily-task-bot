@@ -11,3 +11,5 @@
 3. Активировать виртуальное окружение `source env/bin/activate (Windows: source env/scripts/activate)`
 4. Установить зависимости из файла requirements.txt `pip install -r requirements.txt`
 5. Запустить проект `python main.py`
+
+P.S. Проект находится на стадии доработки.
