@@ -2,10 +2,10 @@ from sqlalchemy import select, and_
 from telebot import types
 
 from database.models import User, Task
-from core.config import bot
-from validators import task_title_length_validator
+from bot.core.config import bot
+from bot.validators.validators import task_title_length_validator
 from database.db import session
-from core.config import TaskState
+from bot.core.config import TaskState
 
 
 async def get_user_id(message) -> int:
@@ -73,18 +73,18 @@ async def create_new_task(message):
     """Создать таску"""
     new_task_title = message.text
 
-    if await task_title_check_duplicate(message, new_task_title) != None:
+    if await task_title_check_duplicate(message, new_task_title) is not None:
         await bot.send_message(
             message.chat.id,
             'Такая таска уже есть.'
         )
-    
+
     elif not task_title_length_validator(new_task_title):
         await bot.send_message(
             message.chat.id,
             'Название таски не должно превышать 128 символов.'
         )
-    
+
     else:
         user_id = await get_user_id(message)
 
@@ -97,7 +97,7 @@ async def create_new_task(message):
             f'Таска "<i>{task.title}</i>" создана!',
             parse_mode='html'
         )
-    
+
     await bot.delete_state(message.from_user.id, message.chat.id)
 
 
@@ -107,7 +107,7 @@ async def close_selected_task(message):
     await bot.delete_state(message.from_user.id, message.chat.id)
 
     task = await get_task_by_title(message)
-    if task == None:
+    if task is None:
         await bot.send_message(
             message.chat.id,
             f'Таски "<i>{message.text}</i>" не существует!',
@@ -136,28 +136,28 @@ async def select_task_for_edit(message):
     global TASK_FOR_EDIT
 
     await bot.delete_state(message.from_user.id, message.chat.id)
-    
+
     TASK_FOR_EDIT = await get_task_by_title(message)
-    if TASK_FOR_EDIT == None:
+    if TASK_FOR_EDIT is None:
         await bot.send_message(
             message.chat.id,
             f'Таски "<i>{message.text}</i>" не существует!',
             parse_mode='html',
         )
-    
+
     else:
         await bot.set_state(
             message.from_user.id,
             TaskState.new_title_for_edit_task,
             message.chat.id
-            )
-        
+        )
+
         await bot.send_message(
             message.chat.id,
             'Напиши новое название таски.',
             reply_markup=types.ReplyKeyboardRemove()
-            )
-    
+        )
+
 
 @bot.message_handler(state=TaskState.new_title_for_edit_task)
 async def update_task_title(message):
@@ -166,18 +166,18 @@ async def update_task_title(message):
     """
     new_task_title = message.text
 
-    if await task_title_check_duplicate(message, new_task_title) != None:
+    if await task_title_check_duplicate(message, new_task_title) is not None:
         await bot.send_message(
             message.chat.id,
             'Такая таска уже есть.'
         )
-    
+
     elif not task_title_length_validator(new_task_title):
         await bot.send_message(
             message.chat.id,
             'Название таски не должно превышать 128 символов.'
         )
-    
+
     else:
         TASK_FOR_EDIT.title = new_task_title
         await session.commit()
@@ -187,5 +187,5 @@ async def update_task_title(message):
             f'Таска отредактирована: "<i>{TASK_FOR_EDIT.title}</i>" ',
             parse_mode='html'
         )
-    
+
     await bot.delete_state(message.from_user.id, message.chat.id)

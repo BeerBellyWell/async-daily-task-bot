@@ -1,12 +1,4 @@
-import os
-
-from dotenv import load_dotenv
-
-
-load_dotenv()
-
-
-help_text = (
+HELP_TEXT = (
     f'• get_tasks — Получить список тасок.\n'
     f'• create_task — Создать таску. Напишите, что вам нужно сделать.\n'
     f'• edit_task — Редактировать таску. Выберите таску, которую хотите изменить '
@@ -15,3 +7,10 @@ help_text = (
     f'чтобы удалить из списка тасок.\n'
     f'• help — Справка.'
 )
+
+HELLO_NO_TASKS = '%s, cейчас у тебя нет задач.'
+HELLO_WITH_TASKS = '%s, вот список твоих задач.'
+START_TEXT = 'Привет, %s! Я DailyTaskBot, твой помощник по отслеживанию ежедневных задач.'
+BTN_GO = 'Давай начнем!'
+BTN_EXIT = 'Вернусь в другой раз'
+CREATE_TASK = 'Создать задачу'

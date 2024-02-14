@@ -1,0 +1,9 @@
+[flake8]
+ignore = E712
+max-complexity = 10
+per-file-ignores = 
+    bot/constants/constants.py: E501, F541
+exclude = 
+    venv/,
+    alembic/,
+    __pycache__

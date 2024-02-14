@@ -4,7 +4,6 @@
 
 Стек: Python v3.11, pyTelegramBotAPI, SQLAlchemy, Git.
 
-
 ### Запуск проекта:
 1. Клонировать репозиторий `git clone git@github.com:BeerBellyWell/async-daily-task-bot.git`
 2. Развернуть виртуальное окружение `python3 -m venv env (Windows: python -m venv env)`
