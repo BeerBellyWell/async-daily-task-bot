@@ -3,8 +3,7 @@
 
 .vscode
 # my
-frontend/build/
-frontend/node_modules/
+commands.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

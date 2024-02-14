@@ -1,4 +1,3 @@
-
 def list_tasks_in_str(tasks_title: list) -> str:
     if len(tasks_title) == 0:
         return False

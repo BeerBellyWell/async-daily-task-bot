@@ -17,7 +17,7 @@ async def start(message):
     """Запустить бота."""
     user_id = await get_user_id(message)
 
-    if user_id == None:
+    if user_id is None:
         await create_user(message)
 
     await bot.send_message(
@@ -38,7 +38,10 @@ async def help(message):
 @bot.message_handler(commands=['create_task'])
 async def create_task(message):
     """Создать таску"""
-    await bot.set_state(message.from_user.id, TaskState.new_task, message.chat.id)
+    await bot.set_state(
+        message.from_user.id,
+        TaskState.new_task, message.chat.id
+    )
     await bot.send_message(
         message.chat.id,
         'Напиши таску',
@@ -55,7 +58,10 @@ async def get_tasks(message):
     if not tasks_string:
         await bot.send_message(message.chat.id, 'В списке тасков ничего нет.')
     else:
-        await bot.send_message(message.chat.id, 'Вот список тасков, которые нужно сделать 👇')
+        await bot.send_message(
+            message.chat.id,
+            'Вот список тасков, которые нужно сделать 👇'
+        )
         await bot.send_message(message.chat.id, f'{tasks_string}')
 
 
@@ -71,11 +77,17 @@ async def delete_task(message):
             'Все таски завершены!'
         )
         await bot.delete_state(message.from_user.id, message.chat.id)
-    
-    else:
-        await bot.set_state(message.from_user.id, TaskState.del_task, message.chat.id)
 
-        markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
+    else:
+        await bot.set_state(
+            message.from_user.id,
+            TaskState.del_task, message.chat.id
+        )
+
+        markup = types.ReplyKeyboardMarkup(
+            resize_keyboard=True,
+            one_time_keyboard=True
+        )
 
         for btn in tasks_title:
             markup.add(types.KeyboardButton(btn))
@@ -96,9 +108,12 @@ async def edit_task(message):
             message.chat.id,
             'Нет тасок для редактирования!'
         )
-    
+
     else:
-        markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
+        markup = types.ReplyKeyboardMarkup(
+            resize_keyboard=True,
+            one_time_keyboard=True
+        )
 
         for btn in tasks_title:
             markup.add(types.KeyboardButton(btn))
@@ -107,12 +122,13 @@ async def edit_task(message):
             message.from_user.id,
             TaskState.select_task_for_edit,
             message.chat.id
-            )
+        )
 
         await bot.send_message(
             message.chat.id,
             'Выбери таску, которую нужно отредактировать.',
-            reply_markup=markup)
+            reply_markup=markup
+        )
 
 
 @bot.message_handler()

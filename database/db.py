@@ -1,6 +1,6 @@
 import os
 
-from sqlalchemy import create_engine, Column, Integer
+from sqlalchemy import Column, Integer
 
 from sqlalchemy.orm import declarative_base, sessionmaker, declared_attr
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession

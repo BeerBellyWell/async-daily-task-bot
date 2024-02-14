@@ -8,6 +8,7 @@ from telebot.asyncio_handler_backends import State, StatesGroup
 
 load_dotenv()
 
+
 class TaskState(StatesGroup):
     new_task = State()
     del_task = State()
@@ -16,4 +17,6 @@ class TaskState(StatesGroup):
     get_tasks = State()
 
 
-bot = AsyncTeleBot(token=os.getenv('TOKEN'), state_storage=StateMemoryStorage())
+bot = AsyncTeleBot(
+    token=os.getenv('TOKEN'), state_storage=StateMemoryStorage()
+)
